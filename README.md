@@ -1,8 +1,8 @@
-# Projeto  - Sistema Gerenciador de Veículos
+# Projeto Fuctura - Sistema Gerenciador de Veículos
 
 ### Versão Java - 17
 
-### Dependecies
+### Dependências do pom.xml
 ```bash
 	    <dependency>
 			<groupId>org.postgresql</groupId>
