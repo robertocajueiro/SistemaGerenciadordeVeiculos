@@ -118,3 +118,5 @@ alter table venda add foreign key (cod_loja) references loja(codigo);
 
 ![image](https://github.com/robertocajueiro/SistemaGerenciadordeVeiculos/assets/28118980/b34851ac-6913-498e-b670-5512d8eaaa94)
 
+
+# Exemplo
