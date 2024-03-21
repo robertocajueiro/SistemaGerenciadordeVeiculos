@@ -2,11 +2,17 @@ package br.com.fuctura;
 
 import java.util.Scanner;
 
+import br.com.fuctura.dao.VeiculoDAO;
+
 public class Principal {
 
 	public static void main(String[] args) {
+		
+		VeiculoDAO vDao = new VeiculoDAO();
 
 		Scanner scanner = new Scanner(System.in);
+		
+		
 		int opcao;
 
 		do {
@@ -52,7 +58,7 @@ public class Principal {
 			switch (opcao) {
 			case 1:
 				System.out.println("Você escolheu Gerenciar Veículo.");
-				// Implemente a lógica para gerenciar veículos aqui
+					gerenciarVeiculo(scanner);
 				break;
 			case 2:
 				System.out.println("Você escolheu Gerenciar Loja.");
@@ -76,7 +82,7 @@ public class Principal {
 			default:
 				System.out.println("Opção inválida. Tente novamente.");
 			}
-
+			
 		} while (opcao != 6);
 	}
 
@@ -122,5 +128,45 @@ public class Principal {
 			}
 
 		} while (opcao != 6);
+	}
+	
+	public static void gerenciarVeiculo(Scanner scanner) {
+		int opcao;
+		do {
+			System.out.println("====== Gerenciar  Veículo ======");
+			System.out.println("1 - Cadastra Veículo");
+			System.out.println("2 - Listar Veículo");
+			System.out.println("3 - Alterar Veículo");
+			System.out.println("4 - Excluir Veículo");
+			System.out.println("5 - Voltar para o menu principal");
+			System.out.print("Escolha uma opção: ");
+			opcao = scanner.nextInt();
+
+			switch (opcao) {
+			case 1:
+				System.out.println("Você escolheu Cadastra Veículo.");
+					
+				break;
+			case 2:
+				System.out.println("Você escolheu Listar Veículo.");
+					VeiculoDAO veiculo = new VeiculoDAO();
+					veiculo.listarVeiculos();
+				break;
+			case 3:
+				System.out.println("Você escolheu Alterar Veículo.");
+				// logica
+				break;
+			case 4:
+				System.out.println("Você escolheu Excluir Veículo.");
+				// logica
+				break;
+			case 5:
+				System.out.println("Voltando para o menu principal...");
+				break;
+			default:
+				System.out.println("Opção inválida. Tente novamente.");
+			}
+			
+		} while (opcao != 5);
 	}
 }
