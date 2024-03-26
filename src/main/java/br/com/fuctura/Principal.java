@@ -47,7 +47,7 @@ public class Principal {
 	public static void frenteDeLoja(Scanner scanner) throws SQLException {
 		int opcao;
 		do {
-			System.out.println("====== Frente de Loja ======");
+			System.out.println("\n====== Frente de Loja ======\n");
 			System.out.println("1 - Gerenciar Veículo");
 			System.out.println("2 - Gerenciar Loja");
 			System.out.println("3 - Gerenciar Vendedor");
@@ -91,7 +91,7 @@ public class Principal {
 	public static void manutencaoCadastro(Scanner scanner) {
 		int opcao;
 		do {
-			System.out.println("====== Manutenção no Cadastro ======");
+			System.out.println("\n====== Manutenção no Cadastro ======\n");
 			System.out.println("1 - Gerenciar Veículo");
 			System.out.println("2 - Gerenciar Loja");
 			System.out.println("3 - Gerenciar Vendedor");
@@ -135,7 +135,7 @@ public class Principal {
 	public static void gerenciarVeiculo(Scanner scanner) throws SQLException {
 		int opcao;
 		do {
-			System.out.println("====== Gerenciar  Veículo ======");
+			System.out.println("\n====== Gerenciar  Veículo ======\n");
 			System.out.println("1 - Cadastra Veículo");
 			System.out.println("2 - Listar Veículo pela placa");
 			System.out.println("3 - Alterar Veículo");
@@ -147,7 +147,6 @@ public class Principal {
 			// Aqui chamo CRUD veiculo
 			VeiculoService veiculoService = new VeiculoService();
 			Scanner sc = new Scanner(System.in);
-			 BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 			Veiculo obj = new Veiculo();
 			VeiculoDAO dao = new VeiculoDAO();
 
@@ -194,7 +193,11 @@ public class Principal {
 				
 			case 4:
 				System.out.println("Você escolheu Excluir Veículo.");
-				// logica
+
+				System.out.println("Digite o código do veiculo que deseja excluir: ");
+		        obj.setCodigo(sc.nextLong());
+		        dao.excluirVeiculo(obj);
+		        
 				break;
 			case 5:
 				System.out.println("Voltando para o menu principal...");

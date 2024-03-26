@@ -159,6 +159,30 @@ public class VeiculoDAO extends ConnectionFactory {
         }
 
     }
+    
+    //Metodo excluir Veiculo
+    public void excluirVeiculo(Veiculo obj) {
+
+        try {
+
+            //Primeiro passo: criar o comando sql
+            String sql = "delete from veiculo where codigo = ?";
+
+            // Segundo passo: conectar o banco de dados e organizar o sql.
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1, obj.getCodigo());
+
+            // Terceiro passo: Executar comando SQL
+            stmt.execute();
+            stmt.close();
+
+            System.out.println("Excluido  com sucesso!");
+
+        } catch (SQLException erro) {
+            System.out.println("Erro: " + erro);
+        }
+
+    }
 
 
 	
