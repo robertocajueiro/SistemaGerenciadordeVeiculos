@@ -59,4 +59,12 @@ public class Veiculo {
 		this.valor = valor;
 	}
 
+	@Override
+	public String toString() {
+		return "Veiculo [codigo=" + codigo + ", placa=" + placa + ", modelo=" + modelo + ", ano=" + ano + ", valor="
+				+ valor + "]";
+	}
+	
+	
+
 }

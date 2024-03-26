@@ -1,18 +1,18 @@
 package br.com.fuctura;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import br.com.fuctura.dao.VeiculoDAO;
+import br.com.fuctura.model.Veiculo;
+import br.com.fuctura.service.VeiculoService;
 
 public class Principal {
 
-	public static void main(String[] args) {
-		
-		VeiculoDAO vDao = new VeiculoDAO();
+	public static void main(String[] args) throws SQLException {
 
 		Scanner scanner = new Scanner(System.in);
-		
-		
+
 		int opcao;
 
 		do {
@@ -42,7 +42,7 @@ public class Principal {
 		scanner.close();
 	}
 
-	public static void frenteDeLoja(Scanner scanner) {
+	public static void frenteDeLoja(Scanner scanner) throws SQLException {
 		int opcao;
 		do {
 			System.out.println("====== Frente de Loja ======");
@@ -58,7 +58,7 @@ public class Principal {
 			switch (opcao) {
 			case 1:
 				System.out.println("Você escolheu Gerenciar Veículo.");
-					gerenciarVeiculo(scanner);
+				gerenciarVeiculo(scanner);
 				break;
 			case 2:
 				System.out.println("Você escolheu Gerenciar Loja.");
@@ -82,7 +82,7 @@ public class Principal {
 			default:
 				System.out.println("Opção inválida. Tente novamente.");
 			}
-			
+
 		} while (opcao != 6);
 	}
 
@@ -129,28 +129,46 @@ public class Principal {
 
 		} while (opcao != 6);
 	}
-	
-	public static void gerenciarVeiculo(Scanner scanner) {
+
+	public static void gerenciarVeiculo(Scanner scanner) throws SQLException {
 		int opcao;
 		do {
 			System.out.println("====== Gerenciar  Veículo ======");
 			System.out.println("1 - Cadastra Veículo");
-			System.out.println("2 - Listar Veículo");
+			System.out.println("2 - Listar Veículo pela placa");
 			System.out.println("3 - Alterar Veículo");
 			System.out.println("4 - Excluir Veículo");
 			System.out.println("5 - Voltar para o menu principal");
 			System.out.print("Escolha uma opção: ");
 			opcao = scanner.nextInt();
 
+			// Aqui chamo CRUD veiculo
+			VeiculoDAO veiculo = new VeiculoDAO();
+			VeiculoService veiculoService = new VeiculoService();
+
 			switch (opcao) {
 			case 1:
 				System.out.println("Você escolheu Cadastra Veículo.");
-					
+				Scanner sc = new Scanner(System.in);
+				Veiculo obj = new Veiculo();
+				VeiculoDAO dao = new VeiculoDAO();
+				System.out.println("Digite o modelo do veículo: ");
+				obj.setModelo(sc.nextLine());
+				System.out.println("Digite o ano do veículo: ");
+				obj.setAno(sc.nextInt());
+				System.out.println("Digite o Placa do veículo: ");
+				obj.setPlaca(sc.next());
+				System.out.println("Digite o valor do veiculo: ");
+				obj.setValor(sc.nextDouble());
+				dao.cadastrarVeiculo(obj);
+				
 				break;
 			case 2:
-				System.out.println("Você escolheu Listar Veículo.");
-					VeiculoDAO veiculo = new VeiculoDAO();
-					veiculo.listarVeiculos();
+				System.out.println("Você escolheu Listar Veículo pela placa.");
+				System.out.print("Digite a placa do veículo: ");
+				String placa = scanner.next();
+				Veiculo listaPorPlaca = veiculoService.findByPlaca(placa).get(0);
+				System.out.println(listaPorPlaca);
 				break;
 			case 3:
 				System.out.println("Você escolheu Alterar Veículo.");
@@ -166,7 +184,7 @@ public class Principal {
 			default:
 				System.out.println("Opção inválida. Tente novamente.");
 			}
-			
+
 		} while (opcao != 5);
 	}
 }
