@@ -143,7 +143,6 @@ public class Principal {
 			opcao = scanner.nextInt();
 
 			// Aqui chamo CRUD veiculo
-			VeiculoDAO veiculo = new VeiculoDAO();
 			VeiculoService veiculoService = new VeiculoService();
 
 			switch (opcao) {
@@ -152,6 +151,7 @@ public class Principal {
 				Scanner sc = new Scanner(System.in);
 				Veiculo obj = new Veiculo();
 				VeiculoDAO dao = new VeiculoDAO();
+
 				System.out.println("Digite o modelo do veículo: ");
 				obj.setModelo(sc.nextLine());
 				System.out.println("Digite o ano do veículo: ");
@@ -160,8 +160,9 @@ public class Principal {
 				obj.setPlaca(sc.next());
 				System.out.println("Digite o valor do veiculo: ");
 				obj.setValor(sc.nextDouble());
+
 				dao.cadastrarVeiculo(obj);
-				
+
 				break;
 			case 2:
 				System.out.println("Você escolheu Listar Veículo pela placa.");

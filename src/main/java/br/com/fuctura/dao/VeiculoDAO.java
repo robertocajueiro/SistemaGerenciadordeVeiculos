@@ -130,6 +130,36 @@ public class VeiculoDAO extends ConnectionFactory {
         }
 
     }
+    
+  //Metodo alterar cliente
+    public void alterarVeiculo(Veiculo obj) {
+
+        try {
+
+            //Primeiro passo: criar o comando sql
+            String sql = "update veiculo set placa=?,modelo=?,ano=?,valor=? where id = ?";
+
+            // Segundo passo: conectar o banco de dados e organizar o sql.
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, obj.getPlaca());
+            stmt.setString(2, obj.getModelo());
+            stmt.setInt(3, obj.getAno());
+            stmt.setDouble(4, obj.getValor());
+
+            stmt.setLong(5, obj.getCodigo());
+
+            // Terceiro passo: Executar comando SQL
+            stmt.execute();
+            stmt.close();
+
+            System.out.println("Alterado com sucesso!");
+
+        } catch (SQLException erro) {
+            System.out.println("Erro: " + erro);
+        }
+
+    }
+
 
 	
 
