@@ -1,5 +1,7 @@
 package br.com.fuctura;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -144,37 +146,52 @@ public class Principal {
 
 			// Aqui chamo CRUD veiculo
 			VeiculoService veiculoService = new VeiculoService();
+			Scanner sc = new Scanner(System.in);
+			 BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+			Veiculo obj = new Veiculo();
+			VeiculoDAO dao = new VeiculoDAO();
 
 			switch (opcao) {
 			case 1:
 				System.out.println("Você escolheu Cadastra Veículo.");
-				Scanner sc = new Scanner(System.in);
-				Veiculo obj = new Veiculo();
-				VeiculoDAO dao = new VeiculoDAO();
 
 				System.out.println("Digite o modelo do veículo: ");
-				obj.setModelo(sc.nextLine());
+				obj.setModelo(sc.next().toUpperCase());
 				System.out.println("Digite o ano do veículo: ");
 				obj.setAno(sc.nextInt());
 				System.out.println("Digite o Placa do veículo: ");
-				obj.setPlaca(sc.next());
+				obj.setPlaca(sc.next().toUpperCase());
 				System.out.println("Digite o valor do veiculo: ");
 				obj.setValor(sc.nextDouble());
-
 				dao.cadastrarVeiculo(obj);
 
 				break;
 			case 2:
 				System.out.println("Você escolheu Listar Veículo pela placa.");
-				System.out.print("Digite a placa do veículo: ");
+				System.out.print("\nDigite a placa do veículo: ");
 				String placa = scanner.next();
 				Veiculo listaPorPlaca = veiculoService.findByPlaca(placa).get(0);
 				System.out.println(listaPorPlaca);
 				break;
 			case 3:
-				System.out.println("Você escolheu Alterar Veículo.");
-				// logica
+				System.out.println("Você escolheu Alterar Veículo no código.");
+				
+				System.out.println("Digite o código do veiculo que deseja alterar: ");
+		        obj.setCodigo(sc.nextLong());
+				
+
+		        System.out.println("Informe o novo Modelo: ");
+		        obj.setModelo(sc.next().toUpperCase());
+		        System.out.println("Informe a nova placa do Veiculo: ");
+		        obj.setPlaca(sc.next().toUpperCase());
+		        System.out.println("Informe o novo Ano: ");
+		        obj.setAno(sc.nextInt());
+		        System.out.println("Informe o novo valor: ");
+		        obj.setValor(sc.nextDouble());
+
+		        dao.alterarVeiculo(obj);
 				break;
+				
 			case 4:
 				System.out.println("Você escolheu Excluir Veículo.");
 				// logica

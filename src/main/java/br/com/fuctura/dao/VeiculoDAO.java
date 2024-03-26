@@ -137,7 +137,7 @@ public class VeiculoDAO extends ConnectionFactory {
         try {
 
             //Primeiro passo: criar o comando sql
-            String sql = "update veiculo set placa=?,modelo=?,ano=?,valor=? where id = ?";
+            String sql = "update veiculo set placa=?,modelo=?,ano=?,valor=? where codigo = ?";
 
             // Segundo passo: conectar o banco de dados e organizar o sql.
             PreparedStatement stmt = con.prepareStatement(sql);
