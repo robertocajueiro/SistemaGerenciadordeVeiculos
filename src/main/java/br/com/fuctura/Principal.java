@@ -1,13 +1,10 @@
 package br.com.fuctura;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Scanner;
 
 import br.com.fuctura.dao.VeiculoDAO;
 import br.com.fuctura.model.Veiculo;
-import br.com.fuctura.service.VeiculoService;
 
 public class Principal {
 
@@ -145,7 +142,6 @@ public class Principal {
 			opcao = scanner.nextInt();
 
 			// Aqui chamo CRUD veiculo
-			VeiculoService veiculoService = new VeiculoService();
 			Scanner sc = new Scanner(System.in);
 			Veiculo obj = new Veiculo();
 			VeiculoDAO dao = new VeiculoDAO();
@@ -169,7 +165,7 @@ public class Principal {
 				System.out.println("Você escolheu Listar Veículo pela placa.");
 				System.out.print("\nDigite a placa do veículo: ");
 				String placa = scanner.next();
-				Veiculo listaPorPlaca = veiculoService.findByPlaca(placa).get(0);
+				Veiculo listaPorPlaca = dao.listarVeiculosPorPlaca(placa).get(0);
 				System.out.println(listaPorPlaca);
 				break;
 			case 3:
