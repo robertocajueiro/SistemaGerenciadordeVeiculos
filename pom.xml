@@ -31,6 +31,12 @@
 			<version>2.10.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>br.com.fuctura</groupId>
+			<artifactId>cepService</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
 	</dependencies>
 
 
