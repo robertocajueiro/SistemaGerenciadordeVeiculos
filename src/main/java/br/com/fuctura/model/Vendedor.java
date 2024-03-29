@@ -2,7 +2,7 @@ package br.com.fuctura.model;
 
 public class Vendedor {
 	private Long codigo;
-	private String vendedor;
+	private String nome;
 
 	public Vendedor() {
 		// TODO Auto-generated constructor stub
@@ -11,7 +11,7 @@ public class Vendedor {
 	public Vendedor(Long codigo, String vendedor) {
 		super();
 		this.codigo = codigo;
-		this.vendedor = vendedor;
+		this.nome = vendedor;
 	}
 
 	public Long getCodigo() {
@@ -22,12 +22,12 @@ public class Vendedor {
 		this.codigo = codigo;
 	}
 
-	public String getVendedor() {
-		return vendedor;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setVendedor(String vendedor) {
-		this.vendedor = vendedor;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

@@ -86,9 +86,7 @@ create table venda(
 
 create table vendedor(
 	codigo serial primary key not null,
-	nome varchar(60),
-	cod_venda integer,
-	foreign key(cod_venda) references venda(codigo)
+	nome varchar(60)
 );
 
 

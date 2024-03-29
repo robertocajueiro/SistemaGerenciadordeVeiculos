@@ -4,7 +4,9 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import br.com.fuctura.dao.impl.VeiculoDAOImpl;
+import br.com.fuctura.dao.impl.VendedorDAOImpl;
 import br.com.fuctura.model.Veiculo;
+import br.com.fuctura.model.Vendedor;
 
 public class Principal {
 
@@ -65,7 +67,7 @@ public class Principal {
 				break;
 			case 3:
 				System.out.println("Você escolheu Gerenciar Vendedor.");
-				// Implemente a lógica para gerenciar vendedores aqui
+				gerenciarVendedor(scanner);
 				break;
 			case 4:
 				System.out.println("Você escolheu Gerenciar Cliente.");
@@ -142,7 +144,6 @@ public class Principal {
 			System.out.print("Escolha uma opção: ");
 			opcao = scanner.nextInt();
 
-			// Aqui chamo CRUD veiculo
 			Scanner sc = new Scanner(System.in);
 			Veiculo obj = new Veiculo();
 			VeiculoDAOImpl dao = new VeiculoDAOImpl();
@@ -162,7 +163,7 @@ public class Principal {
 				dao.cadastrarVeiculo(obj);
 
 				break;
-				
+
 			case 2:
 				System.out.println("Você escolheu listar todos os Veículos.");
 				dao.listar();
@@ -176,30 +177,29 @@ public class Principal {
 				break;
 			case 4:
 				System.out.println("Você escolheu Alterar Veículo no código.");
-				
+
 				System.out.println("Digite o código do veiculo que deseja alterar: ");
-		        obj.setCodigo(sc.nextLong());
-				
+				obj.setCodigo(sc.nextLong());
 
-		        System.out.println("Informe o novo Modelo: ");
-		        obj.setModelo(sc.next().toUpperCase());
-		        System.out.println("Informe a nova placa do Veiculo: ");
-		        obj.setPlaca(sc.next().toUpperCase());
-		        System.out.println("Informe o novo Ano: ");
-		        obj.setAno(sc.nextInt());
-		        System.out.println("Informe o novo valor: ");
-		        obj.setValor(sc.nextDouble());
+				System.out.println("Informe o novo Modelo: ");
+				obj.setModelo(sc.next().toUpperCase());
+				System.out.println("Informe a nova placa do Veiculo: ");
+				obj.setPlaca(sc.next().toUpperCase());
+				System.out.println("Informe o novo Ano: ");
+				obj.setAno(sc.nextInt());
+				System.out.println("Informe o novo valor: ");
+				obj.setValor(sc.nextDouble());
 
-		        dao.atualizarVeiculo(obj);
+				dao.atualizarVeiculo(obj);
 				break;
-				
+
 			case 5:
 				System.out.println("Você escolheu Excluir Veículo.");
 
 				System.out.println("Digite o código do veiculo que deseja excluir: ");
-		        obj.setCodigo(sc.nextLong());
-		        dao.excluirVeiculo(obj);
-		        
+				obj.setCodigo(sc.nextLong());
+				dao.excluirVeiculo(obj);
+
 				break;
 			case 6:
 				System.out.println("Voltando para o menu principal...");
@@ -210,4 +210,83 @@ public class Principal {
 
 		} while (opcao != 6);
 	}
+
+	// ---
+
+	public static void gerenciarVendedor(Scanner scanner) throws SQLException {
+		int opcao;
+		do {
+			System.out.println("\n====== Gerenciar  Vendedor ======\n");
+			System.out.println("1 - Cadastra Vendedor");
+			System.out.println("2 - Listar todos os Vendedores");
+			System.out.println("3 - Listar Vendedor por nome");
+			System.out.println("4 - Alterar Vendedor");
+			System.out.println("5 - Excluir Vendedor");
+			System.out.println("6 - Voltar para o menu principal");
+			System.out.print("Escolha uma opção: ");
+			opcao = scanner.nextInt();
+
+			Scanner sc = new Scanner(System.in);
+			Vendedor obj = new Vendedor();
+			VendedorDAOImpl dao = new VendedorDAOImpl();
+
+			switch (opcao) {
+			case 1:
+				System.out.println("Você escolheu Cadastra Vendedor.");
+
+				System.out.println("Digite o nome do vendedor: ");
+				var nomeVendedor = sc.nextLine();
+				obj.setNome(nomeVendedor);
+
+				if (nomeVendedor.length() >= 5) {
+					dao.cadastrarVendedor(obj);
+				} else {
+					System.out.println("O Nome do vendedor precisa ter no mínimo 5 caracteres");
+				}
+
+				break;
+
+			case 2:
+				System.out.println("Você escolheu listar todos os Vendedores.");
+				dao.listar();
+				break;
+
+			case 3:
+				System.out.println("Você escolheu Listar Vendedores pelo nome.");
+				System.out.print("\nDigite o nome do vendedor: ");
+				String nome = scanner.next();
+				Vendedor listarPorNome = dao.listarByNome(nome).get(0);
+				System.out.println(listarPorNome);
+				break;
+			case 4:
+				System.out.println("Você escolheu Alterar Vendedor chamando pelo código.");
+
+				System.out.println("Digite o código do vendedor: ");
+				obj.setCodigo(sc.nextLong());
+
+				System.out.println("Informe o novo Nome: ");
+				obj.setNome(sc.next().toUpperCase());
+
+				dao.atualizarVendedor(obj);
+				break;
+
+			case 5:
+				System.out.println("Você escolheu Excluir Vendedor.");
+
+				System.out.println("Digite o código do vendedor que deseja excluir: ");
+				obj.setCodigo(sc.nextLong());
+				dao.excluirVendedor(obj);
+
+				break;
+			case 6:
+				System.out.println("Voltando para o menu principal...");
+				break;
+			default:
+				System.out.println("Opção inválida. Tente novamente.");
+			}
+
+		} while (opcao != 6);
+
+	}
+
 }
