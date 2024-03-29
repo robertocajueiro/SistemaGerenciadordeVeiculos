@@ -1,14 +1,14 @@
 package br.com.fuctura;
 
-import br.com.fuctura.dao.VeiculoDAO;
+import br.com.fuctura.dao.impl.VeiculoDAOImpl;
 
 public class appTest {
 
 	public static void main(String[] args) {
 
-		VeiculoDAO dao = new VeiculoDAO();
+		VeiculoDAOImpl dao = new VeiculoDAOImpl();
 		
-		dao.listarVeiculos();
+		dao.listar();
 	}
 
 }

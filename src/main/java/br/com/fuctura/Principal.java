@@ -3,7 +3,7 @@ package br.com.fuctura;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import br.com.fuctura.dao.VeiculoDAO;
+import br.com.fuctura.dao.impl.VeiculoDAOImpl;
 import br.com.fuctura.model.Veiculo;
 
 public class Principal {
@@ -134,17 +134,18 @@ public class Principal {
 		do {
 			System.out.println("\n====== Gerenciar  Veículo ======\n");
 			System.out.println("1 - Cadastra Veículo");
-			System.out.println("2 - Listar Veículo pela placa");
-			System.out.println("3 - Alterar Veículo");
-			System.out.println("4 - Excluir Veículo");
-			System.out.println("5 - Voltar para o menu principal");
+			System.out.println("2 - Listar todos os Veículo");
+			System.out.println("3 - Listar Veículo pela placa");
+			System.out.println("4 - Alterar Veículo");
+			System.out.println("5 - Excluir Veículo");
+			System.out.println("6 - Voltar para o menu principal");
 			System.out.print("Escolha uma opção: ");
 			opcao = scanner.nextInt();
 
 			// Aqui chamo CRUD veiculo
 			Scanner sc = new Scanner(System.in);
 			Veiculo obj = new Veiculo();
-			VeiculoDAO dao = new VeiculoDAO();
+			VeiculoDAOImpl dao = new VeiculoDAOImpl();
 
 			switch (opcao) {
 			case 1:
@@ -161,14 +162,19 @@ public class Principal {
 				dao.cadastrarVeiculo(obj);
 
 				break;
+				
 			case 2:
+				System.out.println("Você escolheu listar todos os Veículos.");
+				dao.listar();
+				break;
+			case 3:
 				System.out.println("Você escolheu Listar Veículo pela placa.");
 				System.out.print("\nDigite a placa do veículo: ");
 				String placa = scanner.next();
-				Veiculo listaPorPlaca = dao.listarVeiculosPorPlaca(placa).get(0);
+				Veiculo listaPorPlaca = dao.listarByPlaca(placa).get(0);
 				System.out.println(listaPorPlaca);
 				break;
-			case 3:
+			case 4:
 				System.out.println("Você escolheu Alterar Veículo no código.");
 				
 				System.out.println("Digite o código do veiculo que deseja alterar: ");
@@ -184,10 +190,10 @@ public class Principal {
 		        System.out.println("Informe o novo valor: ");
 		        obj.setValor(sc.nextDouble());
 
-		        dao.alterarVeiculo(obj);
+		        dao.atualizarVeiculo(obj);
 				break;
 				
-			case 4:
+			case 5:
 				System.out.println("Você escolheu Excluir Veículo.");
 
 				System.out.println("Digite o código do veiculo que deseja excluir: ");
@@ -195,13 +201,13 @@ public class Principal {
 		        dao.excluirVeiculo(obj);
 		        
 				break;
-			case 5:
+			case 6:
 				System.out.println("Voltando para o menu principal...");
 				break;
 			default:
 				System.out.println("Opção inválida. Tente novamente.");
 			}
 
-		} while (opcao != 5);
+		} while (opcao != 6);
 	}
 }
