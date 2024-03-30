@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
+import br.com.fuctura.dao.IVeiculoDAO;
 import br.com.fuctura.jdbc.ConnectionFactory;
 import br.com.fuctura.model.Veiculo;
 
-public class VeiculoDAOImpl extends ConnectionFactory {
+public class VeiculoDAOImpl extends ConnectionFactory implements IVeiculoDAO {
 
 	private Connection con;
 
@@ -20,30 +20,26 @@ public class VeiculoDAOImpl extends ConnectionFactory {
 		this.con = new ConnectionFactory().getConnection();
 	}
 
-	public void inserir() {
+	public void insert(Connection conn, Veiculo veiculo) {
 
-		Scanner sc = new Scanner(System.in);
-		Veiculo veiculo = new Veiculo();
 		try {
-			String sql = "INSERT INTO veiculos (modelo, placa, ano, valor) " + "VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO veiculos (modelo, placa, ano, valor) VALUES (?, ?, ?, ?, ?)";
 
 			PreparedStatement stmt = con.prepareStatement(sql);
 			System.out.print("Digite o modelo do carro: ");
-			stmt.setString(1, sc.next(veiculo.getModelo()));
-			stmt.setString(2, sc.next(veiculo.getPlaca()));
-			stmt.setInt(3, sc.nextInt(veiculo.getAno()));
-			stmt.setDouble(4, sc.nextInt((int) veiculo.getValor()));
-			stmt.executeUpdate();
+			stmt.setString(1, veiculo.getModelo());
+			stmt.setString(2, veiculo.getPlaca());
+			stmt.setInt(3, veiculo.getAno());
+			stmt.setDouble(4, ((int) veiculo.getValor()));
+			stmt.execute();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		sc.close();
-
 	}
 
-	public void listar() {
+	public void listAll(Connection conn, Veiculo veiculo) {
 
 		String sql = "SELECT * FROM veiculo";
 		try (Statement statement = con.createStatement()) {
@@ -60,7 +56,7 @@ public class VeiculoDAOImpl extends ConnectionFactory {
 		}
 	}
 
-	public List<Veiculo> listarByPlaca(String placa) throws SQLException {
+	public List<Veiculo> listarPorPlaca(String placa) throws SQLException {
 
 		List<Veiculo> veiculos = new ArrayList<>();
 		Connection conn = null;

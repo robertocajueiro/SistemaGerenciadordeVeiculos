@@ -1,4 +1,4 @@
-package br.com.fuctura;
+package br.com.fuctura.aplicacao;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -8,7 +8,7 @@ import br.com.fuctura.dao.impl.VendedorDAOImpl;
 import br.com.fuctura.model.Veiculo;
 import br.com.fuctura.model.Vendedor;
 
-public class Principal {
+public class Aplicacao {
 
 	public static void main(String[] args) throws SQLException {
 
@@ -153,26 +153,35 @@ public class Principal {
 				System.out.println("Você escolheu Cadastra Veículo.");
 
 				System.out.println("Digite o modelo do veículo: ");
-				obj.setModelo(sc.next().toUpperCase());
+				var modeloVeiculo = sc.nextLine().toUpperCase();
+				obj.setModelo(modeloVeiculo);
+
 				System.out.println("Digite o ano do veículo: ");
-				obj.setAno(sc.nextInt());
-				System.out.println("Digite o Placa do veículo: ");
-				obj.setPlaca(sc.next().toUpperCase());
-				System.out.println("Digite o valor do veiculo: ");
-				obj.setValor(sc.nextDouble());
+				var anoVeiculo = sc.nextInt();
+				obj.setAno(anoVeiculo);
+
+				System.out.println("Digite a placa do veículo: ");
+				var placaVeiculo = sc.next().toUpperCase();
+				obj.setPlaca(placaVeiculo);
+
+				System.out.println("Digite o valor do veículo: ");
+				var valorVeiculo = sc.nextDouble();
+				obj.setValor(valorVeiculo);
+
 				dao.cadastrarVeiculo(obj);
 
 				break;
 
 			case 2:
 				System.out.println("Você escolheu listar todos os Veículos.");
-				dao.listar();
+				dao.listAll(null, obj);
 				break;
+				
 			case 3:
 				System.out.println("Você escolheu Listar Veículo pela placa.");
 				System.out.print("\nDigite a placa do veículo: ");
-				String placa = scanner.next();
-				Veiculo listaPorPlaca = dao.listarByPlaca(placa).get(0);
+				var placa = scanner.next();
+				Veiculo listaPorPlaca = dao.listarPorPlaca(placa).get(0);
 				System.out.println(listaPorPlaca);
 				break;
 			case 4:
@@ -182,7 +191,9 @@ public class Principal {
 				obj.setCodigo(sc.nextLong());
 
 				System.out.println("Informe o novo Modelo: ");
-				obj.setModelo(sc.next().toUpperCase());
+				var altModeloVeiculo = sc.nextLine().toUpperCase();
+				obj.setModelo(altModeloVeiculo);
+
 				System.out.println("Informe a nova placa do Veiculo: ");
 				obj.setPlaca(sc.next().toUpperCase());
 				System.out.println("Informe o novo Ano: ");
