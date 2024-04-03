@@ -23,7 +23,7 @@ public class VeiculoDAOImpl extends ConnectionFactory implements IVeiculoDAO {
 	public void insert(Connection conn, Veiculo veiculo) {
 
 		try {
-			String sql = "INSERT INTO veiculos (modelo, placa, ano, valor) VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO veiculo (modelo, placa, ano, valor) VALUES (?, ?, ?, ?, ?)";
 
 			PreparedStatement stmt = con.prepareStatement(sql);
 			System.out.print("Digite o modelo do carro: ");

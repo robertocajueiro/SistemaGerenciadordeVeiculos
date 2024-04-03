@@ -220,6 +220,7 @@ public class Aplicacao {
 			}
 
 		} while (opcao != 6);
+		
 	}
 
 	// ---
